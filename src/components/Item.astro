@@ -1,0 +1,46 @@
+---
+const {url, Image, Model, Body, Year, ActualPrice } = Astro.props
+---
+
+<div class="wrap">
+  <a href={url}>
+    <img class="img" src={Image} alt="">
+    <div class="description">
+      <div class="head"> 
+        <h4>{Model} {Body} {Year}</h3>
+          <h5>{ActualPrice}$</h5>
+      </div>
+
+    </div>
+  </a>
+
+</div>
+
+
+<style>
+  .wrap {
+    max-width: 30%;
+    overflow: hidden;
+    flex: 1;
+    background-color: #dcdde0;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    object-position: bottom;
+  }
+
+  .description {
+    padding: 0 10px;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>

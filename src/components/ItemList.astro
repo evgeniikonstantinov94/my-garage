@@ -1,0 +1,24 @@
+---
+import Item from './Item.astro'
+
+const {items} = Astro.props
+---
+
+
+<div class="wrap">
+  <ul class="list">
+    {items?.map((item: any) => {
+      return  <Item url={item.link} {...item}/> 
+    })}
+
+  </ul>
+</div>
+
+
+<style>
+  .list {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+  }
+</style>

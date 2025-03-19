@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Sidebar from '../components/Sidebar.astro'
+import ItemList from '../components/ItemList.astro';
+import fetchApi from '../lib/strapi';
+import type Car from '../interfaces/car';
+
+const pageTitle = 'My cars';
+const allPosts = Object.values(import.meta.glob('../pages/cars/*.md', { eager: true }));
+const listOfMyCars = [{
+  title: 'BMW',
+  body: "F36",
+  color: "black",
+  year: "2016",
+  actualPrice: '23000',
+  link: "/cars/car1",
+  image: {
+    url: "https://pluto.bid.car/1-70310904/2016-BMW-4-Series-WBA4C9C59GG141491-5.jpg",
+    alt: 'Thumbnail of Astro arcs.'
+  }
+},
+{
+  title: 'BMW',
+  body: "E38",
+  color: "blue",
+  year: "2000",
+  img: "https://a.d-cd.net/5fd3fe9s-1920.jpg",
+  actualPrice: '8000',
+  link: "/cars/car2",
+    image: {
+    url: "https://a.d-cd.net/5fd3fe9s-1920.jpg",
+    alt: 'Thumbnail of Astro arcs.'
+  }
+},
+{
+  title: 'BMW',
+  body: "E28",
+  color: "silver",
+  year: "1984",
+  actualPrice: '3000',
+  link: "/cars/car3",
+    image: {
+    url: "https://a.d-cd.net/5K2MenJQyMg9pic9Vs-iMly-9ko-960.jpg",
+    alt: 'Thumbnail of Astro arcs.'
+  }
+}]
+
+
+const cars = await fetchApi<any[]>({
+  endpoint: 'cars', 
+  wrappedByKey: 'data', 
+});
+
+
+---
+
+<Layout pageTitle={pageTitle}>
+  <Sidebar />
+  <div class="wrap">
+    	<h1>Dashboard page</h1>
+      <ItemList items={cars} />
+
+  </div>
+</Layout>
+
+
+<style>
+  .wrap {
+    margin-left: 150px;
+  }
+
+</style>

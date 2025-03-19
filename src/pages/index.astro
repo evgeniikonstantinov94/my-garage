@@ -1,0 +1,30 @@
+---
+import Greeting from '../components/Greeting';
+import Layout from '../layouts/Layout.astro';
+import fetchApi from '../lib/strapi';
+import type Car from '../interfaces/car';
+
+await fetchApi<Car[]>({
+  endpoint: 'articles',
+  wrappedByKey: 'data',
+});
+
+const articles = await fetchApi<any[]>({
+  endpoint: 'cars', 
+  wrappedByKey: 'data', 
+});
+---
+
+<Layout>
+  <h2>Мой потрясающий подзаголовок блога</h2>
+		{
+			articles?.map((article) => (
+				<li>
+					<a href={`/blog/${article.attributes?.slug}/`}>
+						{article.attributes?.title}
+					</a>
+				</li>
+			))
+		}
+	<Greeting client:load  messages={["Привет", "Здравствуйте", "Приветствую", "Эй там"]}/>
+</Layout>

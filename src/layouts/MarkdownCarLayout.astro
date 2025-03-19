@@ -1,0 +1,13 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter } = Astro.props;
+const pageTitle = 'BMW'
+---
+<meta charset="utf-8" />
+
+<Layout pageTitle={pageTitle}>
+  <h1>{frontmatter.title}</h1>
+  <p>Автор: {frontmatter.author}</p>
+  <slot />
+</Layout>

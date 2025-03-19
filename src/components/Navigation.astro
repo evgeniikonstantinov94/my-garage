@@ -1,0 +1,59 @@
+---
+import ThemeIcon from './ThemeIcon.astro';
+
+const allCars = await Astro.glob('../pages/cars/*.md');
+const tags = [...new Set(allCars.map((car) => car.frontmatter.brand).flat())];
+---
+
+<nav>
+  <div class="listWrap">
+    <ul class="list">
+      <li >
+
+        <a href="/"> <img class="logo"  src="/src/assets/logo.svg"></a>
+      </li>
+      {tags.map((tag) => <li> <a href={`/brands/${tag}`}>{tag}</a></li>)}
+      <li class="login">
+        Login
+        <ThemeIcon /> 
+
+      </li>
+    </ul>
+
+  </div>
+ 
+</nav>
+
+
+<style>
+	nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    margin-bottom: 50px;
+    background-color: #e0eaff;
+    box-shadow: 1px 3px 10px #c6bdbd;
+    z-index: 2;
+	}
+  .listWrap {
+    padding: 10px 20px;
+  }
+  .login {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .logo {
+    width: 110px;
+    background: none;
+  }
+  .list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    cursor: pointer;
+  }
+</style>
